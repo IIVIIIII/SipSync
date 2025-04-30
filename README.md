@@ -42,6 +42,6 @@ Edit
 cd SipSyncGUI  
 python app.py  
 👥 Team Contribution
-Ivana Rasch: Data loading and access, full front-end development including GUI and audio pipeline
+Ivana Rasch: Data loading and access, front-end development including GUI and audio pipeline.
 
-Kelvin [Last Name]: Data cleaning, preprocessing, model development and training
+Kelvin Walls: Data cleaning, preprocessing, model development and training.
