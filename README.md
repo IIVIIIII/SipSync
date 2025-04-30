@@ -49,7 +49,7 @@ Uses the predicted mood to generate a cocktail recipe using OpenAI's API
 ```bash
 cd SipSyncModels
 # Open and run the provided Jupyter Notebook called SipSync2
-
+```
 ```bash
 cd SipSyncGUI
 python app.py
