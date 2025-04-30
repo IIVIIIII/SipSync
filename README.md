@@ -1,47 +1,28 @@
-# SipSync
+# 🥂 SipSync
 
-🎵🍸 Project Idea and Goals
-SipSync is a creative AI-powered project that generates custom cocktail recipes based on songs. The goal is to explore the relationship between music and mood, using machine learning to classify a song’s emotional profile and then prompting a generative model to produce a thematically aligned cocktail recipe.
+SipSync is a creative AI-powered application that generates custom cocktail recipes based on songs. By analyzing the mood of a song, SipSync prompts a language model to generate a cocktail recipe that matches the vibe of the music.
 
-📊 Data Used
-We used the MTG-Jamendo dataset, a large open-source collection of over 55,000 Creative Commons-licensed music tracks. Each track is tagged with genre, instrument, and mood/theme annotations. For this project, we focused on the mood/theme subset (approximately 18,000 tracks) to train a model that predicts the emotional tone of a song.
+---
 
-🗂 Code Structure
-The codebase is organized into two main directories:
+## 🎯 Project Goals
 
-SipSyncModels/
-Contains scripts and notebooks for:
+- Predict the mood of a song using machine learning
+- Generate a cocktail recipe that reflects the emotional tone of the song
+- Build an end-to-end pipeline from song input to recipe output
+- Develop both backend model training and a user-friendly front-end app
 
-Loading and preprocessing the Jamendo data
+---
 
-Training and fine-tuning a mood classification model using transfer learning
+## 📊 Data Used
 
-SipSyncGUI/
-Contains the front-end code that:
+We use the **MTG-Jamendo dataset**, a large-scale open-source music dataset consisting of:
 
-Accepts a song name input
+- 55,000+ Creative Commons-licensed audio tracks  
+- 195 tags across genre, instrument, and mood/theme categories  
 
-Searches YouTube and downloads the audio
+For this project, we focus on the **mood/theme subset** (~18,000 tracks), which is suitable for mood classification tasks.
 
-Runs the mood classifier
+---
 
-Uses the predicted mood to generate a cocktail recipe using OpenAI's API
+## 📁 Project Structure
 
-To run the backend model:
-
-bash
-Copy
-Edit
-cd SipSyncModels  
-Run the Jupyter Notebook provided  
-To test the front-end (locally):
-
-bash
-Copy
-Edit
-cd SipSyncGUI  
-python app.py  
-👥 Team Contribution
-Ivana Rasch: Data loading and access, front-end development including GUI and audio pipeline.
-
-Kelvin Walls: Data cleaning, preprocessing, model development and training.
