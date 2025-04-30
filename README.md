@@ -54,6 +54,8 @@ cd SipSyncModels
 cd SipSyncGUI
 python app.py
 
+```
+
 ---
 
 ## 👥 Team Contribution
