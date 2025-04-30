@@ -20,7 +20,7 @@ We use the **MTG-Jamendo dataset**, a large-scale open-source music dataset cons
 - 55,000+ Creative Commons-licensed audio tracks  
 - 195 tags across genre, instrument, and mood/theme categories  
 
-For this project, we focus on the **mood/theme subset** (~18,000 tracks), which is suitable for mood classification tasks.
+
 
 ---
 
@@ -45,4 +45,11 @@ Searches YouTube and downloads the audio
 Runs the mood classifier
 
 Uses the predicted mood to generate a cocktail recipe using OpenAI's API
+
+```bash
+cd SipSyncModels
+# Open and run the provided Jupyter Notebook called SipSync2
+
+cd SipSyncGUI
+python app.py
 
