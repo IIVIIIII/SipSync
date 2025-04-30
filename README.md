@@ -50,6 +50,15 @@ Uses the predicted mood to generate a cocktail recipe using OpenAI's API
 cd SipSyncModels
 # Open and run the provided Jupyter Notebook called SipSync2
 
+```bash
 cd SipSyncGUI
 python app.py
+
+---
+
+## 👥 Team Contribution
+Ivana Rasch: Data loading and access, full front-end development including GUI and audio pipeline
+
+Kelvin Walls: Data cleaning, preprocessing, model development and training
+
 
