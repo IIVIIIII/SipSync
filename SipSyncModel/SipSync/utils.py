@@ -1,3 +1,4 @@
+utils.py
 import os
 import numpy as np
 import random
@@ -13,23 +14,7 @@ import mirdata
 
 eps = np.finfo(float).eps
 
-# mood_mapping = {'mood/theme---happy': 0,
-#  'mood/theme---positive': 1,
-#  'mood/theme---love': 2,
-#  'mood/theme---romantic': 3,
-#  'mood/theme---energetic': 4,
-#  'mood/theme---party': 5,
-#  'mood/theme---relaxing': 6,
-#  'mood/theme---calm': 7,
-#  'mood/theme---sad': 8,
-#  'mood/theme---melancholic': 9,
-#  'mood/theme---dark': 10,
-#  'mood/theme---heavy': 11,
-#  'mood/theme---dream': 12,
-#  'mood/theme---space': 13,
-#  'mood/theme---inspiring': 14,
-#  'mood/theme---hopeful': 15}
-
+# map moods to their class number values
 mood_mapping = {'mood/theme---happy': 0,
  'mood/theme---positive': 1,
  'mood/theme---love': 2,
@@ -40,27 +25,6 @@ mood_mapping = {'mood/theme---happy': 0,
  'mood/theme---calm': 7,
  'mood/theme---sad': 8,
  'mood/theme---melancholic': 9}
-
-
-# first8
-# {'mood/theme---happy': 0,
-#  'mood/theme---positive': 1,
-#  'mood/theme---love': 2,
-#  'mood/theme---romantic': 3,
-#  'mood/theme---energetic': 4,
-#  'mood/theme---party': 5,
-#  'mood/theme---relaxing': 6,
-#  'mood/theme---calm': 7}
-
-#better 8
-# mood_mapping = {'mood/theme---happy': 0,
-#  'mood/theme---love': 1,
-#  'mood/theme---energetic': 2,
-#  'mood/theme---relaxing': 3,
-#  'mood/theme---sad': 4,
-#  'mood/theme---dark': 5,
-#  'mood/theme---dream': 6,
-#  'mood/theme---inspiring': 7}
 
 
 def load_data(data_home, dataset_name='mtg_jamendo_autotagging_moodtheme', version='default', track_ids=None):
@@ -132,8 +96,6 @@ def compute_mel_spectrogram(audio, sample_rate=22050, n_mels=128, hop_length=512
         Mel spectrogram as a 2D numpy array.
 
     """
-    # Hint: use librosa melspectrogram and librosa power_to_db
-    # YOUR CODE HERE
 
     # Compute Mel spectrogram from the audio signal
     melspec = librosa.feature.melspectrogram(y=audio, sr=sample_rate, n_mels=n_mels, hop_length=hop_length)
@@ -173,40 +135,29 @@ def window_audio(audio, sample_rate, audio_seg_size, segments_overlap):
     >>> y, sr = librosa.load(librosa.ex('trumpet'))
     >>> audio_windows = window_audio(y, sr, audio_seg_size=1, segments_overlap=0.5)
     """
-    # YOUR CODE HERE
 
     windows = []
 
-    # Calculate the window size in samples
+    # calculate the window size in samples
     win_size = audio_seg_size * sample_rate
     
-    # Calculate the overlap size in samples
+    # calculate the overlap size in samples
     overlap_size = segments_overlap * sample_rate
 
-    # Iterate through the audio signal, extracting windows
-
-
+    # calculate number of windows
     num_windows = int(np.ceil(len(audio)/(win_size-overlap_size)))
 
 
+    # pad signal with zeros
     padding = np.zeros(len(audio) % (win_size*num_windows))
     padded = np.concatenate([audio, padding])
 
-    
+    # extract windows from audio
     for hop in range(num_windows):
       if hop+win_size < len(padded):
         hop = int(hop * (win_size-overlap_size))
         window = padded[hop: hop+win_size]
         windows.append(window)
-
-
-        # If the window end is within the audio length, extract the window
-        
-            # Padding the last window with zeros if it extends beyond the audio length
-
-        # Add the window to the list of audio windows
-        
-        # Update the start position for the next window, considering the overlap
 
     return windows
 
@@ -231,8 +182,6 @@ def pitch_shift_audio(audio, sample_rate=22050, pitch_shift_steps=2):
     np.ndarray
         The pitch-shifted audio signal.
     """
-    # Hint: use librosa pitch shift
-    # YOUR CODE HERE
 
     shifty = librosa.effects.pitch_shift(audio, sr=sample_rate, n_steps=pitch_shift_steps)
 
@@ -257,8 +206,6 @@ def extract_yamnet_embedding(wav_data, yamnet):
     np.ndarray
         The extracted embeddings from YAMNet.
     """
-    # Hint: check the tensorflow models to see how YAMNET should be used
-    # YOUR CODE HERE
 
     scores, embeddings, spectrogram = yamnet(wav_data)
 
@@ -268,24 +215,8 @@ def extract_yamnet_embedding(wav_data, yamnet):
 
 
 
+# was worth a shot
 # def extract_musicfm_embedding(wav_data, musicfm):
-#     """
-#     Run YAMNet to extract embeddings from the wav data.
-
-#     Parameters
-#     ----------
-#     wav_data : np.ndarray
-#         The audio signal to be processed.
-#     yamnet : tensorflow.keras.Model
-#         The pre-trained YAMNet model.
-
-#     Returns
-#     -------
-#     np.ndarray
-#         The extracted embeddings from YAMNet.
-#     """
-
-#     # wav_data = tf.cast(wav_data, tf.float32)
 
 #     embeddings = musicfm.get_latent(wav_data, layer_ix=7)
 
@@ -338,8 +269,6 @@ def wav_generator(data_home, augment, track_ids=None, sample_rate=22050,
     ...     # Process audio and label
 
     """
-    # Hint: base your generator on the win_generator
-    # YOUR CODE HERE
 
     # Get list of audio paths and their corresponding labels
     audio_file_paths, labels = load_data(data_home, track_ids=track_ids)
@@ -367,10 +296,6 @@ def wav_generator(data_home, augment, track_ids=None, sample_rate=22050,
         # Apply augmentation
         if augment:
             audio = pitch_shift_audio(audio, sample_rate, pitch_shift_steps)
-
-
-        
-        # audio = tf.cast(audio, tf.float32) #REMOVE
 
 
         yield audio, label
@@ -653,4 +578,3 @@ def plot_spectrogram(log_spectrogram, sr, hop_length, genre=None):
     plt.ylabel('Mel Frequency')
     plt.tight_layout()
     plt.show()
-
