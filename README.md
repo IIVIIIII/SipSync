@@ -56,9 +56,6 @@ python app.py
 
 ```
 ---
-## 🔑 Results and Key Findings
-
----
 
 ## 👥 Team Contribution
 Ivana Rasch: Data loading and access, front-end development including GUI and audio pipeline
